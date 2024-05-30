@@ -10,6 +10,7 @@ import toml
 from tqdm import tqdm
 
 import torch
+torch.backends.cuda.matmul.allow_tf32 = True
 from library.device_utils import init_ipex, clean_memory_on_device
 
 init_ipex()

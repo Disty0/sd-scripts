@@ -141,27 +141,25 @@ def load_clip_text_model(text_model_checkpoint_path, dtype=None, device="cpu", s
     else:
         logger.info(f"Loading CLIP text model from {text_model_checkpoint_path}")
 
-        # copy from sdxl_model_util.py
         text_model2_cfg = CLIPTextConfig(
-            vocab_size=49408,
-            hidden_size=1280,
-            intermediate_size=5120,
-            num_hidden_layers=32,
-            num_attention_heads=20,
-            max_position_embeddings=77,
-            hidden_act="gelu",
-            layer_norm_eps=1e-05,
-            dropout=0.0,
+            architectures=["CLIPTextModelWithProjection"],
             attention_dropout=0.0,
-            initializer_range=0.02,
+            bos_token_id=49406,
+            dropout=0.0,
+            eos_token_id=49407,
+            hidden_act="gelu",
+            hidden_size=1280,
             initializer_factor=1.0,
-            pad_token_id=1,
-            bos_token_id=0,
-            eos_token_id=2,
+            initializer_range=0.02,
+            intermediate_size=5120,
+            layer_norm_eps=1e-05,
+            max_position_embeddings=77,
             model_type="clip_text_model",
+            num_attention_heads=20,
+            num_hidden_layers=32,
+            pad_token_id=1,
             projection_dim=1280,
-            # torch_dtype="float32",
-            # transformers_version="4.25.0.dev0",
+            vocab_size=49408
         )
         with init_empty_weights():
             text_model = CLIPTextModelWithProjection(text_model2_cfg)
